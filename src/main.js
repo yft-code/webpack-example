@@ -1,2 +1,3 @@
 import count from './js/count'
-console.log(count(1,2));
+const result = count(2, 2);
+console.log(result);
