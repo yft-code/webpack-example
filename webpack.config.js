@@ -5,6 +5,9 @@ const path=require('path')//nodejs核心模块，专门用来处理路径问题
 // npm install eslint-webpack-plugin --save-dev
 // npm install eslint --save-dev
 const ESLintPlugin = require('eslint-webpack-plugin');
+
+// html资源处理,将打包后的文件自动引入html页面
+const HtmlWebpackPlugin=require('html-webpack-plugin')
 module.exports={
   // 入口
   entry:'./src/main.js',//相对路径
@@ -70,15 +73,19 @@ module.exports={
             filename:"static/media/[hash:10][ext][query]"
           }
         }, 
-        
-
       ]
   },
   // 插件
-  plugins:[new ESLintPlugin({
+  plugins:[
+    new ESLintPlugin({
     // 只检查src目录下的代码
     context:path.resolve(__dirname,"src")
-  })],
+  }),
+   new HtmlWebpackPlugin({
+    // 模板,打包生成的html页面与public/index.html页面结构一致
+    template:path.resolve(__dirname,"public/index.html")
+   })
+],
   // 模式
   mode:'development',
 //   lintOnSave:false
