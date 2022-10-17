@@ -48,12 +48,28 @@ module.exports={
           // map3,mp4,avi等资源配置
           test: /\.(ttf|woff2?)$/,
           type:"asset/resource",
+        
       // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
           generator:{
             filename:"static/media/[hash:10][ext][query]"
           }
         },
-        
+        // 配置babel
+        {
+          // map3,mp4,avi等资源配置
+          test: /\.js$/,
+         exclude:'/node_modules/',//排除module文件
+         use:{
+          loader:'babel-loader',
+          // options:{
+          //  presets:['@babel/preset-env']
+          // }
+       },
+      // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
+          generator:{
+            filename:"static/media/[hash:10][ext][query]"
+          }
+        }, 
         
 
       ]
