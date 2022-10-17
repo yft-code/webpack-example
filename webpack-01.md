@@ -12,3 +12,7 @@
 # devServe执行命令:npx webpack serve
 
 # 开发环境配置
+
+# 生产和开发模式比较
+# 1.生产模式不需要devServe
+# 2.开发模式不需要输出文件
