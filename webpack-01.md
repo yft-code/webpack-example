@@ -8,3 +8,7 @@
 
 # eslint官网
 # https://eslint.bootcss.com/docs/rules/
+
+# devServe执行命令:npx webpack serve
+
+# 开发环境配置

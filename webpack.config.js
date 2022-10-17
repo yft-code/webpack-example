@@ -10,6 +10,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin=require('html-webpack-plugin')
 
 // dev-serve 自动重新打包
+// 下载 npm i webpack-dev-server -D
 module.exports={
   // 入口
   entry:'./src/main.js',//相对路径
