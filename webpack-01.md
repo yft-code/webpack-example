@@ -5,3 +5,6 @@
    # /src/main.js  入口文件
    # npx webpack ./src/main.js --mode=development
 # 3.配置webpack.config.js文件后，直接执行npx webpack命令即可
+
+# eslint官网
+# https://eslint.bootcss.com/docs/rules/
