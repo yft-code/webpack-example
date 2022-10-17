@@ -1,7 +1,7 @@
 .box1{
-    width: 100px;
+    width: 500px;
     height: 100px;
     background: url('../images/2.png');
-    background: red;
+    background: blue;
     background: url('../images/1.jpeg');
 }

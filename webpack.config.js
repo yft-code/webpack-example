@@ -8,6 +8,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 // html资源处理,将打包后的文件自动引入html页面
 const HtmlWebpackPlugin=require('html-webpack-plugin')
+
+// dev-serve 自动重新打包
 module.exports={
   // 入口
   entry:'./src/main.js',//相对路径
@@ -86,7 +88,13 @@ module.exports={
     template:path.resolve(__dirname,"public/index.html")
    })
 ],
-  // 模式
+// 启动devServe命令：npx webpack serve
+devServer: {
+  host: "localhost",
+  port: 9000, // 端口号
+  open: true, //配置自动启动浏览器
+},
+  // 模式：开发环境
   mode:'development',
 //   lintOnSave:false
 }
