@@ -30,7 +30,14 @@ module.exports={
         {
           test: /\.css$/,
           use: [ 'style-loader', 
-                 'css-loader',
+                 {
+                  loader:'css-loader',
+                  options:{
+                    // importloaders的取值与后面还有几个loader有关系，
+                    // 后面目前只有postcss-loader一个插件,所以importloaders的值为1
+                    importloaders:1
+                  }
+                 },
                 //单独设置一个postcss.config.js文件(文件名固定，不能起其他名字，否则读取不到)进行option的配置
                 'postcss-loader'
                 ]//css打包到js中去了
