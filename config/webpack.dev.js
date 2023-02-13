@@ -30,44 +30,56 @@ module.exports={
         {
           test: /\.css$/,
           use: [ 'style-loader', 
-                 {
-                  loader:'css-loader',
-                  options:{
-                    // importloaders的取值与后面还有几个loader有关系，
-                    // 后面目前只有postcss-loader一个插件,所以importloaders的值为1
-                    importloaders:1
-                  }
-                 },
+                 'css-loader',
+                //  {
+                //   loader:'css-loader',
+                //   options:{
+                //     // importloaders的取值与后面还有几个loader有关系，
+                //     // 后面目前只有postcss-loader一个插件,所以importloaders的值为1
+                //     importloaders:1
+                //   }
+                //  },
                 //单独设置一个postcss.config.js文件(文件名固定，不能起其他名字，否则读取不到)进行option的配置
                 'postcss-loader'
                 ]//css打包到js中去了
         },
-        // 配置图片不需要下载额外的loader
+    // 配置图片不需要下载额外的loader
+      //   {
+      //     test: /\.(png|jpe?g|svg)$/,
+      //     type:"asset",
+      //     parser:{
+      //       dataUrlCondition:{
+      //         // 小于10KB的图片转base64,优点：减少请求资源,
+      //         maxSize:10*1024,
+      //       }
+      //     },
+      // // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
+      //     generator:{
+      //       filename:"static/images/[hash][ext][query]"
+      //     }
+      //   },
         {
-          test: /\.(png|jpe?g|svg)$/,
-          type:"asset",
-          parser:{
-            dataUrlCondition:{
-              // 小于10KB的图片转base64,优点：减少请求资源,
-              maxSize:10*1024,
+          test: /\.(png|jpe?g|svg|gif)$/,
+           use:[
+            {
+              loader:"file-loader",
+              options:{
+                name:'[name].[hash:6].[ext]'
+              }
             }
-          },
-      // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
-          generator:{
-            filename:"static/images/[hash][ext][query]"
-          }
+           ]
         },
         // 处理字体图片等其他资源
-        {
-          // map3,mp4,avi等资源配置
-          test: /\.(ttf|woff2?)$/,
-          type:"asset/resource",
+      //   {
+      //     // map3,mp4,avi等资源配置
+      //     test: /\.(ttf|woff2?)$/,
+      //     type:"asset/resource",
         
-      // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
-          generator:{
-            filename:"static/media/[hash:10][ext][query]"
-          }
-        },
+      // // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
+      //     generator:{
+      //       filename:"static/media/[hash:10][ext][query]"
+      //     }
+      //   },
         // 配置babel
         {
           // map3,mp4,avi等资源配置
