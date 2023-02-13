@@ -26,11 +26,13 @@ module.exports={
   // 加载器
   module:{
     rules: [ 
+      // 从下往上运行
         {
           test: /\.css$/,
           use: [ 'style-loader', 
                  'css-loader',
-                //  'less-loader'//将less编译成css文件
+                //单独设置一个postcss.config.js文件(文件名固定，不能起其他名字，否则读取不到)进行option的配置
+                'postcss-loader'
                 ]//css打包到js中去了
         },
         // 配置图片不需要下载额外的loader
@@ -91,7 +93,7 @@ module.exports={
 // 启动devServe命令：npx webpack serve
 devServer: {
   host: "localhost",
-  port: 9000, // 端口号
+  port: 8000, // 端口号
   open: true, //配置自动启动浏览器
 },
   // 模式：开发环境

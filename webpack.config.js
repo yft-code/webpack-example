@@ -1,6 +1,6 @@
 const path=require('path')//nodejs核心模块，专门用来处理路径问题
 // const resolve = (dir) => path.join(__dirname, dir);
-
+console.log('user');
 // eslint配置
 // npm install eslint-webpack-plugin --save-dev
 // npm install eslint --save-dev
@@ -31,6 +31,18 @@ module.exports={
           test: /\.css$/,
           use: [ 'style-loader', 
                  'css-loader',
+                //  'postcss-loader'这样配置不起作用,需要使用下面的方法
+                // 因为css加前缀需要通过插件autoprefixer来协助,
+                {
+                  loader:'postcss-loader',
+                  options:{
+                    postcssOptions:{
+                      plugins:[
+                        require("autoprefixer")
+                      ]
+                    }
+                  }
+                 }
                 //  'less-loader'//将less编译成css文件
                 ]//css打包到js中去了
         },
@@ -92,7 +104,7 @@ module.exports={
 // 启动devServe命令：npx webpack serve
 devServer: {
   host: "localhost",
-  port: 9000, // 端口号
+  port: 8000, // 端口号
   open: true, //配置自动启动浏览器
 },
   // 模式：开发环境

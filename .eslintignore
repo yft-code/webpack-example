@@ -1,2 +1,3 @@
 #  eslint忽略的文件
 dist
+node_modules

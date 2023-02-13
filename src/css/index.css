@@ -1,7 +1,13 @@
 .box1{
     width: 500px;
     height: 100px;
+    color: #34567812;
     background: url('../images/2.png');
     background: blue;
     background: url('../images/1.jpeg');
+    user-select: none;
+}
+.content{
+    /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/user-select */
+    user-select: none;
 }
