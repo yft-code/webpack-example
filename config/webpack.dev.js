@@ -44,31 +44,37 @@ module.exports={
                 ]//css打包到js中去了
         },
     // 配置图片不需要下载额外的loader
-      //   {
-      //     test: /\.(png|jpe?g|svg)$/,
-      //     type:"asset",
-      //     parser:{
-      //       dataUrlCondition:{
-      //         // 小于10KB的图片转base64,优点：减少请求资源,
-      //         maxSize:10*1024,
-      //       }
-      //     },
-      // // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
-      //     generator:{
-      //       filename:"static/images/[hash][ext][query]"
-      //     }
-      //   },
         {
-          test: /\.(png|jpe?g|svg|gif)$/,
-           use:[
-            {
-              loader:"file-loader",
-              options:{
-                name:'[name].[hash:6].[ext]'
-              }
+          test: /\.(png|jpe?g|svg)$/,
+          type:"asset",
+          parser:{
+            dataUrlCondition:{
+              // 小于10KB的图片转base64,优点：减少请求资源,
+              maxSize:10*1024,
             }
-           ]
+          },
+      // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
+          generator:{
+            filename:"static/images/[hash][ext][query]"
+          }
         },
+        // {
+        //   test: /\.(png|jpe?g|svg|gif)$/,
+        //    use:[
+        //     {
+        //       loader:"file-loader",
+        //       // way1
+        //       // options:{
+        //       //   name:'[name].[hash:6].[ext]',
+        //       //   outputPath:"img"
+        //       // }
+        //       // way2(推荐使用且常见)
+        //       options:{
+        //         name:'img/[name].[hash:6].[ext]'
+        //       }
+        //     }
+        //    ]
+        // },
         // 处理字体图片等其他资源
       //   {
       //     // map3,mp4,avi等资源配置
