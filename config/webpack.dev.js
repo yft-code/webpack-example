@@ -58,6 +58,27 @@ module.exports={
             filename:"static/images/[hash][ext][query]"
           }
         },
+        // url-loader,小的转base64,大的不转
+        // 缺点：需要更多的http请求
+        {
+          test: /\.(png|jpe?g|svg|gif)$/,
+           use:[
+            {
+              loader:"url-loader",
+              // way1
+              // options:{
+              //   name:'[name].[hash:6].[ext]',
+              //   outputPath:"img"
+              // }
+              // way2(推荐使用且常见)
+              options:{
+                name:'img/[name].[hash:6].[ext]',
+                // 小于100kb转base64
+                limit:100*1024
+              }
+            }
+           ]
+        },
         // {
         //   test: /\.(png|jpe?g|svg|gif)$/,
         //    use:[
