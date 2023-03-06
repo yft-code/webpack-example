@@ -21,7 +21,9 @@ module.exports={
     path:undefined,
     filename:'static/js/main.js',
     // 清空上一次的打包记录
-    clean:true
+    clean:true,
+    // hash:6,哈希保留6位
+    assetModuleFilename:"img/[name].[hash:6].[ext]"
   },
   // 加载器
   module:{
@@ -43,10 +45,11 @@ module.exports={
                 'postcss-loader'
                 ]//css打包到js中去了
         },
+    // 使用asset
     // 配置图片不需要下载额外的loader
         {
           test: /\.(png|jpe?g|svg)$/,
-          type:"asset",
+          type:"asset",//对应url-loader
           parser:{
             dataUrlCondition:{
               // 小于10KB的图片转base64,优点：减少请求资源,
@@ -58,26 +61,16 @@ module.exports={
             filename:"static/images/[hash][ext][query]"
           }
         },
-        // url-loader,小的转base64,大的不转
+        // url-loader,
+        // 配置asset
+        // 小的转base64,大的不转
         // 缺点：需要更多的http请求
         {
           test: /\.(png|jpe?g|svg|gif)$/,
-           use:[
-            {
-              loader:"url-loader",
-              // way1
-              // options:{
-              //   name:'[name].[hash:6].[ext]',
-              //   outputPath:"img"
-              // }
-              // way2(推荐使用且常见)
-              options:{
-                name:'img/[name].[hash:6].[ext]',
-                // 小于100kb转base64
-                limit:100*1024
-              }
-            }
-           ]
+          type:"asset/resource",//对应url-loader
+          generator:{
+            filename:"static/images/[hash][ext][query]"
+          }
         },
         // {
         //   test: /\.(png|jpe?g|svg|gif)$/,
@@ -97,26 +90,26 @@ module.exports={
         //    ]
         // },
         // 处理字体图片等其他资源
-      //   {
-      //     // map3,mp4,avi等资源配置
-      //     test: /\.(ttf|woff2?)$/,
-      //     type:"asset/resource",
-        
-      // // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
-      //     generator:{
-      //       filename:"static/media/[hash:10][ext][query]"
-      //     }
-      //   },
-        // 配置babel
         {
           // map3,mp4,avi等资源配置
+          test: /\.(ttf|woff2?)$/,
+          type:"asset/resource",
+        
+      // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
+          generator:{
+            filename:"static/media/[hash:10][ext][query]"
+          }
+        },
+        // 配置babel
+        {
+         
           test: /\.js$/,
          exclude:'/node_modules/',//排除module文件
          use:{
           loader:'babel-loader',
-          // options:{
-          //  presets:['@babel/preset-env']
-          // }
+          options:{
+           presets:['@babel/preset-env']
+          }
        },
       // 修改输出文件目录，css打包到css，js打包到js  filename:'static/js/main.js'
           generator:{
@@ -133,7 +126,8 @@ module.exports={
   }),
    new HtmlWebpackPlugin({
     // 模板,打包生成的html页面与public/index.html页面结构一致
-    template:path.resolve(__dirname,"../public/index.html")
+    template:path.resolve(__dirname,"../public/index.html"),
+    title:"codewhy webpack"
    })
 ],
 // 启动devServe命令：npx webpack serve
