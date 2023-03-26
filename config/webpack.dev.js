@@ -13,13 +13,21 @@ const HtmlWebpackPlugin=require('html-webpack-plugin')
 // 下载 npm i webpack-dev-server -D
 module.exports={
   // 入口
-  entry:'./src/main.js',//相对路径
+  // 绝对路径
+  // context:path.resolve(__dirname,'../src'),
+  // entry写上相对路径时，并不是相对于文件所在的文件，而是相对于context配置的路径
+  // entry:'./main.js',//相对路径
+  entry:{
+     main:'./src/main.js',
+     index:'./src/index.js',
+  },
   // 出口
   output:{
     // 文件的输出路径
-    // path:resolve("dist"),//绝对路径
-    path:undefined,
-    filename:'static/js/main.js',
+    path:path.resolve("dist"),//绝对路径
+    // path:undefined,
+    // 路径相对path的
+    filename:'[name]/js/main.js',
     // 清空上一次的打包记录
     clean:true,
     // hash:6,哈希保留6位
