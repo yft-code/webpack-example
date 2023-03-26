@@ -8,7 +8,7 @@ const path=require('path')//nodejs核心模块，专门用来处理路径问题
 const ESLintPlugin = require('eslint-webpack-plugin');
 // html资源处理,将打包后的文件自动引入html页面
 const HtmlWebpackPlugin=require('html-webpack-plugin')
-
+const TerserPlugin =require('terser-webpack-plugin')
 // dev-serve 自动重新打包
 // 下载 npm i webpack-dev-server -D
 module.exports={
@@ -32,6 +32,25 @@ module.exports={
     clean:true,
     // hash:6,哈希保留6位
     assetModuleFilename:"img/[name].[hash:6].[ext]"
+  },
+  optimization:{
+     minimizer:[
+      new TerserPlugin ({
+        extractComments:false
+      })
+     ],
+      splitChunks:{
+        // async 异步的,只有代码中的异步才有效
+        // initial  ，同步
+        // all  同步/异步
+         chunks:"all",
+        //  最小尺寸：如果拆分出来一个包，那么拆分出来的这个包大小最小为minSize,
+        // 默认值20000
+         minSize:20000,
+        //  将大于maxSize的包，拆分成不小于minSize的包
+        // 默认值为0
+         maxSize:0
+      }
   },
   // 加载器
   module:{
